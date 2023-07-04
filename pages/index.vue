@@ -4,7 +4,7 @@
       <h2>Get the latest tech news!</h2>
     </div>
     <section class="featured-posts container">
-      <post-list />
+      <post-list :posts="loadedPosts" />
     </section>
   </section>
 </template>
@@ -19,6 +19,16 @@ export default {
     PostPreview,
     PostList,
   },
+  computed: {
+    loadedPosts() {
+      return this.$store.getters.loadedPosts;
+    },
+  },
+  // data() {
+  //   return {
+  //     loadedPosts: [],
+  //   };
+  // },
 };
 </script>
 

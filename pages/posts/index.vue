@@ -1,6 +1,6 @@
 <template>
   <section class="posts-page container">
-    <post-list />
+    <post-list :posts="loadedPosts" />
   </section>
 </template>
 
@@ -11,6 +11,11 @@ export default {
   name: "PostsPage",
   components: {
     PostList,
+  },
+  computed: {
+    loadedPosts() {
+      return this.$store.getters.loadedPosts;
+    },
   },
 };
 </script>

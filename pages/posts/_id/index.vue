@@ -3,25 +3,13 @@
     <section class="single-post-page">
       <article class="post">
         <div class="post-heading">
-          <h2 class="title">Post Title</h2>
+          <h2 class="title">{{ loadedPost.title }}</h2>
           <div class="post-details">
-            <p class="post-updated">Last updated on XXX</p>
-            <p class="post-author">Written by AUTHOR</p>
+            <p class="post-updated">{{ loadedPost.updatedDate }}</p>
+            <p class="post-author">{{ loadedPost.author }}</p>
           </div>
         </div>
-        <p class="post-content">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odit
-          blanditiis veritatis dolorem itaque similique voluptate fugit tempora
-          voluptatum rerum corporis pariatur maiores doloribus, aut laborum
-          ratione quisquam cumque veniam ea. Praesentium molestias maxime
-          repellendus rem dicta fugit est atque optio debitis nihil nemo,
-          veritatis vero molestiae ipsa ex minus recusandae officiis ea!
-          Repellat earum numquam quasi vel dignissimos magnam nisi. Ratione et
-          sed cumque illo accusantium earum, itaque aliquam corrupti, beatae
-          necessitatibus quam voluptate perspiciatis nesciunt nemo quaerat nisi
-          nostrum officiis sapiente doloremque ut harum rem. At iure ducimus
-          saepe.
-        </p>
+        <p class="post-content">{{ loadedPost.content }}</p>
       </article>
       <aside class="post-feedback">
         <h3 class="feedback-title">Feedback</h3>
@@ -35,6 +23,23 @@
     </section>
   </div>
 </template>
+
+<script>
+import axios from "axios";
+
+export default {
+  async asyncData(context) {
+    return axios
+      .get(
+        `https://nuxt-blog-2023-default-rtdb.firebaseio.com/posts/${context.params.id}.json`
+      )
+      .then((res) => {
+        return { loadedPost: res.data };
+      })
+      .catch((e) => context.error(e));
+  },
+};
+</script>
 
 <style scoped>
 .single-post-page {

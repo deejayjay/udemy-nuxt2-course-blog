@@ -1,24 +1,12 @@
 <template>
   <section class="post-list">
     <post-preview
-      id="1"
-      title="Post 1"
-      previewText="Preview Text 1"
-      :thumbnail="require('~/assets/images/posts/post-1.jpg')"
-      :is-admin="isAdmin"
-    />
-    <post-preview
-      id="2"
-      title="Post 2"
-      previewText="Preview Text 2"
-      :thumbnail="require('~/assets/images/posts/post-2.jpg')"
-      :is-admin="isAdmin"
-    />
-    <post-preview
-      id="3"
-      title="Post 3"
-      previewText="Preview Text 3"
-      :thumbnail="require('~/assets/images/posts/post-3.jpg')"
+      v-for="post in posts"
+      :key="post.id"
+      :id="post.id"
+      :title="post.title"
+      :previewText="post.previewText"
+      :thumbnail="post.thumbnail"
       :is-admin="isAdmin"
     />
   </section>
@@ -36,6 +24,10 @@ export default {
     isAdmin: {
       type: Boolean,
       default: false,
+    },
+    posts: {
+      type: Array,
+      required: true,
     },
   },
 };
