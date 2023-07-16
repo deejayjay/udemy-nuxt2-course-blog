@@ -1,14 +1,14 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'nuxt-course-blog',
+    title: 'WD Blog',
     htmlAttrs: {
       lang: 'en'
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
+      { hid: 'description', name: 'description', content: 'My cool blog' },
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
@@ -27,6 +27,8 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    "@/plugins/core-components.js",
+    "@/plugins/date-filter.js"
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -41,5 +43,16 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+  },
+  env: {
+    baseUrl: process.env.BASE_URL || 'https://nuxt-blog-2023-default-rtdb.firebaseio.com'
+  },
+  transition: {
+    name: 'fade',
+    mode: 'out-in'
+  },
+  layoutTransition: {
+    name: 'fade',
+    mode: 'out-in'
   }
 }

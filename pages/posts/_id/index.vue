@@ -5,7 +5,7 @@
         <div class="post-heading">
           <h2 class="title">{{ loadedPost.title }}</h2>
           <div class="post-details">
-            <p class="post-updated">{{ loadedPost.updatedDate }}</p>
+            <p class="post-updated">{{ loadedPost.updatedDate | date }}</p>
             <p class="post-author">{{ loadedPost.author }}</p>
           </div>
         </div>
@@ -30,9 +30,7 @@ import axios from "axios";
 export default {
   async asyncData(context) {
     return axios
-      .get(
-        `https://nuxt-blog-2023-default-rtdb.firebaseio.com/posts/${context.params.id}.json`
-      )
+      .get(`${process.env.baseUrl}/posts/${context.params.id}.json`)
       .then((res) => {
         return { loadedPost: res.data };
       })
